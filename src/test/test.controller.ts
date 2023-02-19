@@ -1,4 +1,4 @@
-import { Controller, Post, UseGuards, Body, Get } from '@nestjs/common';
+import { Controller, Post, UseGuards, Body, Get, Param } from '@nestjs/common';
 import { JwtAuthGuard } from 'src/auth/guards/jwt.guard';
 import { User } from 'src/user/decorators/user.decorator';
 import { TestDto } from './dto/test.dto';
@@ -17,5 +17,10 @@ export class TestController {
   @Get()
   async getAll() {
     return await this.testService.getAll()
+  }
+  @Get(':id')
+  async parseFile(@Param('id') id: number) {
+    return await this.testService.parseFile(id)
+
   }
 }

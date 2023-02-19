@@ -1,8 +1,9 @@
-import { Controller, Post, UseGuards, Body } from '@nestjs/common';
+import { Controller, Post, UseGuards, Body, Get, Param } from '@nestjs/common';
 import { JwtAuthGuard } from 'src/auth/guards/jwt.guard';
 import { User } from 'src/user/decorators/user.decorator';
 import { TestResDto } from './dto/test-res.dto';
 import { TestResService } from './test-res.service';
+import fs from 'fs'
 
 @Controller('test-res')
 export class TestResController {
@@ -13,4 +14,6 @@ export class TestResController {
   async create(@User('id') userId: number, @Body() dto: TestResDto) {
     return await this.testResService.create(userId, dto)
   }
+
+
 }

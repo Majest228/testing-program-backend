@@ -55,7 +55,7 @@ export class FilesController {
     }
     @Get(':filename')
     getImage(@Param('filename') file, @Res() res) {
-        const response = res.sendFile(file, { root: './uploads' });
+        const response = res.sendFile(file, { root: './uploads/tests' });
         return {
             status: HttpStatus.OK,
             data: response,
