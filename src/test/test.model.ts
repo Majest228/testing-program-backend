@@ -1,3 +1,5 @@
+import { AnswerModel } from 'src/answer/answer.model';
+import { QuestionModel } from 'src/question/question.model';
 import { TestResModel } from 'src/test-res/test-res.model';
 import { UserModel } from 'src/user/user.model';
 import { Base } from 'src/utils/base';
@@ -18,6 +20,7 @@ export class TestModel extends Base {
     @OneToMany(() => TestResModel, testRes => testRes.test, { onDelete: 'CASCADE' })
     testRes: TestResModel[]
 
-
+    @OneToMany(() => AnswerModel, answer => answer.test, { onDelete: 'CASCADE' })
+    answer: AnswerModel[]
 
 }

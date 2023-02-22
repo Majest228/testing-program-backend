@@ -7,13 +7,11 @@ import { TestService } from './test.service';
 @Controller('test')
 export class TestController {
   constructor(private readonly testService: TestService) { }
-
   @Post()
   @UseGuards(JwtAuthGuard)
   async create(@User('id') ownerId: number, @Body() dto: TestDto) {
     return await this.testService.create(ownerId, dto)
   }
-
   @Get()
   async getAll() {
     return await this.testService.getAll()
@@ -21,6 +19,9 @@ export class TestController {
   @Get(':id')
   async parseFile(@Param('id') id: number) {
     return await this.testService.parseFile(id)
-
+  }
+  @Get('docx/:id')
+  async parseFileDocx(@Param('id') id: number) {
+    return await this.testService.parseFileDocx(id)
   }
 }

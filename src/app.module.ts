@@ -10,6 +10,8 @@ import { TestModule } from './test/test.module';
 import { MulterModule } from '@nestjs/platform-express'
 import { FilesModule } from './files/files.module';
 import { TestResModule } from './test-res/test-res.module';
+import { QuestionModule } from './question/question.module';
+import { AnswerModule } from './answer/answer.module';
 @Module({
   imports: [
     MulterModule.register({
@@ -26,7 +28,9 @@ import { TestResModule } from './test-res/test-res.module';
     AuthModule,
     TestModule,
     FilesModule,
-    TestResModule
+    TestResModule,
+    QuestionModule,
+    AnswerModule
   ],
   controllers: [AppController],
   providers: [AppService],
