@@ -19,8 +19,8 @@ export class UserModel extends Base {
     @Column({ default: '' })
     surname: string
 
-    @Column({ default: 'Worker' })
-    role: Role
+    @Column({ default: false })
+    isAdmin: boolean
 
     @OneToMany(() => TestModel, test => test.user, { onDelete: 'CASCADE' })
     test: TestModel[]
@@ -29,9 +29,3 @@ export class UserModel extends Base {
     testRes: TestResModel[]
 }
 
-
-enum Role {
-    Worker = "Worker",
-    Head = "Head",
-    Admin = "Admin"
-}

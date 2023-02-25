@@ -1,6 +1,7 @@
 import { Controller, Get, Post, UseInterceptors, UploadedFile, UploadedFiles, Res, Param, HttpStatus } from '@nestjs/common';
 import { FileInterceptor, FilesInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
+import { Auth } from 'src/auth/decorators/auth.decorator';
 import { editFileName } from '../utils/file.upload';
 
 @Controller('files')
@@ -8,6 +9,7 @@ export class FilesController {
     constructor() { }
 
     @Post()
+    @Auth('admin')
     @UseInterceptors(
         FileInterceptor('file', {
             storage: diskStorage({
@@ -30,6 +32,7 @@ export class FilesController {
     }
 
     @Post('uploadMultipleFiles')
+    @Auth('admin')
     @UseInterceptors(
         FilesInterceptor('file', 10, {
             storage: diskStorage({

@@ -8,7 +8,7 @@ import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateCol
 @Entity('tests')
 export class TestModel extends Base {
 
-    @Column()
+    @Column({ default: "" })
     name: string;
 
     @ManyToOne(() => UserModel, user => user.test, { onDelete: 'CASCADE' })

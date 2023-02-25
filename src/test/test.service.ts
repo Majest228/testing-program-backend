@@ -22,6 +22,7 @@ export class TestService {
         })
 
         const test = await this.testModel.save(newTest)
+        return test
 
     }
 

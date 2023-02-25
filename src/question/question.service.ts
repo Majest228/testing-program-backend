@@ -20,7 +20,6 @@ export class QuestionService {
         const questions = [];
         for (let i = 0; i < text.length; i++) {
             if ((i + 1) % (count) == 0) {
-
                 let variants = []
                 for (let j = 2; j < count + 1; j++) {
                     variants.push(text[i - (count - j)])
@@ -32,13 +31,15 @@ export class QuestionService {
         }
         questions.forEach((question, i) => {
             let currentQuestion = question[0]
-            question[1].forEach(item => {
+
+            question[1].forEach((item, index) => {
                 const newValue = this.questionModel.create({
                     question: currentQuestion,
                     questionId: i + 1,
                     variant: item,
                     count: count,
-                    testId
+                    testId,
+                    isRight: index == 0 ? true : false
                 })
                 return this.questionModel.save(newValue)
             })
@@ -46,7 +47,21 @@ export class QuestionService {
     }
 
     async getByTestId(testId: number) {
-        return await this.questionModel.findBy({ testId })
+        return await (await this.questionModel.find({ where: { testId, isRight: true } })).sort((a, b) => a.questionId - b.questionId)
     }
 
+    async getQuestion(testId: number) {
+        const question = await this.questionModel.find({ where: { testId } })
+        const questions = question.reduce((o, i) => {
+            if (!o.find(v => v.questionId == i.questionId)) {
+                o.push(i);
+            }
+            return o;
+        }, []);
+
+        return questions
+    }
+
+
+    async getWithoutIsRight(testId: number) { return await this.questionModel.find({ where: { testId }, select: { count: true, question: true, testId: true, variant: true, questionId: true, id: true } }) }
 }

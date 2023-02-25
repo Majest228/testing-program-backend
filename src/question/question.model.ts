@@ -19,4 +19,7 @@ export class QuestionModel extends Base {
 
     @Column()
     testId: number
+
+    @Column()
+    isRight: boolean
 }

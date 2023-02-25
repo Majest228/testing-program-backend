@@ -95,6 +95,7 @@ export class AuthService {
         return {
             id: user.id,
             login: user.login,
+            isAdmin: user.isAdmin
         }
     }
 }
