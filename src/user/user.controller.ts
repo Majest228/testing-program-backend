@@ -1,5 +1,5 @@
 import { Controller, Get, Param, Body } from '@nestjs/common';
-import { HttpCode, Patch, UseGuards, UsePipes } from '@nestjs/common/decorators';
+import { Delete, HttpCode, Patch, UseGuards, UsePipes } from '@nestjs/common/decorators';
 import { ValidationPipe } from '@nestjs/common/pipes';
 import { Auth } from 'src/auth/decorators/auth.decorator';
 import { JwtAuthGuard } from 'src/auth/guards/jwt.guard';
@@ -51,5 +51,15 @@ export class UserController {
   async getAll() {
     return this.userService.getAll()
   }
+
+  @UsePipes(new ValidationPipe())
+  @HttpCode(200)
+  @Auth('admin')
+  @Delete(":id")
+  async deleteUser(@Param("id") id: number) {
+    return this.userService.deleteUser(id)
+  }
+
+
 
 }

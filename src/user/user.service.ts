@@ -45,4 +45,9 @@ export class UserService {
     async getAll() {
         return await this.usersModel.find()
     }
+
+    async deleteUser(id: number) {
+        return await this.usersModel.delete(id)
+
+    }
 }

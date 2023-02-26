@@ -20,6 +20,11 @@ export class TestController {
   async parseFile(@Param('id') id: number) {
     return await this.testService.parseFile(id)
   }
+
+  @Get('testByid/:id')
+  async getById(@Param('id') id: number) {
+    return await this.testService.getById(id)
+  }
   @Get('docx/:id')
   async parseFileDocx(@Param('id') id: number) {
     return await this.testService.parseFileDocx(id)

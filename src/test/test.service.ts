@@ -25,7 +25,9 @@ export class TestService {
         return test
 
     }
-
+    async getById(id: number) {
+        return await this.testModel.findOneBy({ id })
+    }
     async getAll() {
         return await this.testModel.find()
     }
